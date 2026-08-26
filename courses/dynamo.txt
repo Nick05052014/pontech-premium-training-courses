@@ -1,0 +1,9 @@
+# Chương 1 — Nền tảng
+01.mp4-Giới thiệu Dynamo
+02.mp4-Giao diện Dynamo
+03.mp4-Demo cách Dynamo hoạt động
+04.mp4-Node trong Dynamo
+
+# Chương 2 — Ứng dụng
+05.mp4-Cách tìm node và cách các node làm việc
+06.mp4-Các kiểu dữ liệu cơ bản
