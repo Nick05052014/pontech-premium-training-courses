@@ -1,0 +1,9 @@
+Đặt các video MP4 của khóa Dynamo vào thư mục này.
+
+Tên file phải trùng với phần đứng trước dấu "-" trong courses/dynamo.txt.
+
+Ví dụ:
+- videos/dynamo/01.mp4
+- courses/dynamo.txt có dòng: 01.mp4-Giới thiệu Dynamo
+
+Nên đặt tên file ngắn gọn: 01.mp4, 02.mp4, 03.mp4...
