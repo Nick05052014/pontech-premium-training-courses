@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071d2a" />
+  <meta name="description" content="Pontech Learning Hub — bản đồ năng lực và chương trình đào tạo kỹ sư." />
+  <meta property="og:title" content="Pontech Learning Hub" />
+  <meta property="og:description" content="Build skills. Shape the future." />
+  <title>Pontech Learning Hub</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2300c2c7'/%3E%3Ctext x='17' y='48' font-size='43' font-family='Arial' font-weight='900' fill='white'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Pontech Learning Hub">
+      <span class="brand-mark">P</span>
+      <span>PONTECH <b>LEARNING</b></span>
+    </a>
+    <nav aria-label="Điều hướng chính">
+      <a href="#skill-map">Bản đồ kỹ năng</a>
+      <a href="#courses">Khóa học</a>
+      <a href="#roadmap">Lộ trình</a>
+    </nav>
+    <button class="profile-button" type="button" aria-label="Hồ sơ học tập">PT</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span>PONTECH LEARNING ECOSYSTEM</div>
+        <h1>BUILD SKILLS.<br /><em>SHAPE THE FUTURE.</em></h1>
+        <p>Khám phá lộ trình năng lực dành cho thế hệ kỹ sư số — từ nền tảng kỹ thuật, BIM đến lập trình và tự động hóa.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#skill-map">Khám phá bản đồ <span>↗</span></a>
+          <a class="button secondary" href="#courses">Xem khóa học</a>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div>
+        <div class="orbit-core">P</div><i class="orbit-dot dot-one"></i><i class="orbit-dot dot-two"></i>
+      </div>
+      <div class="hero-stats reveal">
+        <div><strong>06</strong><span>Tuyến năng lực</span></div>
+        <div><strong>24</strong><span>Kỹ năng chuyên môn</span></div>
+        <div><strong>05'</strong><span>Mỗi tập bài giảng</span></div>
+      </div>
+    </section>
+
+    <section class="skill-section section-pad" id="skill-map">
+      <div class="section-heading reveal">
+        <div><span class="kicker">01 / SKILL ATLAS</span><h2>Bản đồ năng lực</h2></div>
+        <p>Chọn một điểm trên bản đồ để xem tổng quan khóa đào tạo và kỹ năng được mở khóa tiếp theo.</p>
+      </div>
+      <div class="map-filters reveal" role="group" aria-label="Bộ lọc bản đồ">
+        <button class="filter active" data-filter="all">Tất cả</button>
+        <button class="filter" data-filter="bim"><i class="legend cyan"></i>BIM & Modeling</button>
+        <button class="filter" data-filter="code"><i class="legend orange"></i>Lập trình</button>
+        <button class="filter" data-filter="process"><i class="legend purple"></i>Quy trình</button>
+        <button class="filter" data-filter="lead"><i class="legend green"></i>Quản lý</button>
+      </div>
+      <div class="skill-map reveal" id="mapCanvas">
+        <div class="map-grid" aria-hidden="true"></div>
+        <div id="mapLines" aria-hidden="true"></div>
+        <div id="skillNodes"></div>
+        <div class="map-toolbar" aria-label="Điều khiển bản đồ">
+          <button id="zoomOut" aria-label="Thu nhỏ">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="Phóng to">＋</button>
+        </div>
+        <div class="map-note">Kéo để khám phá · Cuộn để thu phóng · Click để xem khóa học</div>
+      </div>
+    </section>
+
+    <section class="courses-section section-pad" id="courses">
+      <div class="section-heading light reveal">
+        <div><span class="kicker">02 / FEATURED COURSES</span><h2>Khóa học nổi bật</h2></div>
+        <p>Mỗi bài giảng được chia thành các tập ngắn, tập trung vào một mục tiêu thực hành cụ thể.</p>
+      </div>
+      <div class="course-grid" id="courseGrid"></div>
+    </section>
+
+    <section class="roadmap-section section-pad" id="roadmap">
+      <div class="section-heading reveal">
+        <div><span class="kicker">03 / YOUR ROADMAP</span><h2>Một lộ trình.<br />Nhiều bước tiến.</h2></div>
+        <p>Tiến độ được lưu ngay trên thiết bị. Khi hoàn thành khóa học, kỹ năng kế tiếp trên bản đồ sẽ được mở sáng.</p>
+      </div>
+      <div class="roadmap-card reveal">
+        <div class="progress-ring" id="progressRing"><span id="overallPercent">0%</span></div>
+        <div class="roadmap-copy">
+          <span class="micro-label">LỘ TRÌNH ĐỀ XUẤT</span>
+          <h3>BIM Automation Engineer</h3>
+          <p>BIM Foundation → Revit Structure → Dynamo → Python → Revit API</p>
+          <div class="progress-bar"><i id="overallBar"></i></div>
+          <small id="progressSummary">0/0 bài học đã hoàn thành</small>
+        </div>
+        <button class="button dark" id="continueBtn" type="button">Tiếp tục học <span>→</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#top"><span class="brand-mark">P</span><span>PONTECH <b>LEARNING</b></span></a>
+    <p>DESIGN FOR THE FUTURE · LEARN FOR THE FUTURE</p>
+    <span>Prototype 2026</span>
+  </footer>
+
+  <div class="modal-backdrop" id="courseModal" aria-hidden="true">
+    <article class="course-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Đóng">×</button>
+      <div class="modal-visual" id="modalVisual">
+        <span class="modal-code" id="modalCode">PT.01</span>
+        <div class="visual-symbol" id="modalSymbol">B</div>
+        <span class="modal-track" id="modalTrack">BIM & MODELING</span>
+      </div>
+      <div class="modal-content">
+        <span class="kicker">COURSE OVERVIEW</span>
+        <h2 id="modalTitle">BIM Foundation</h2>
+        <p class="modal-lead" id="modalDescription"></p>
+        <div class="course-facts" id="modalFacts"></div>
+        <div class="outcomes">
+          <h3>Sau khóa học, học viên có thể</h3>
+          <ul id="modalOutcomes"></ul>
+        </div>
+        <div class="prerequisite"><span>Điều kiện đầu vào</span><b id="modalPrerequisite"></b></div>
+        <button class="button primary wide" id="startCourse" type="button">Bắt đầu khóa học <span>→</span></button>
+      </div>
+    </article>
+  </div>
+
+  <section class="learning-view" id="learningView" aria-hidden="true">
+    <header class="learning-header">
+      <button id="backToSite" class="back-button" type="button">← <span>Quay lại khóa học</span></button>
+      <a class="brand" href="#"><span class="brand-mark">P</span><span>PONTECH <b>LEARNING</b></span></a>
+      <div class="lesson-progress"><span id="lessonProgressText">0/0 tập</span><i><b id="lessonProgressBar"></b></i></div>
+    </header>
+    <div class="learning-layout">
+      <div class="lesson-main">
+        <div class="video-shell" id="videoShell">
+          <video id="lessonVideo" controls playsinline></video>
+          <div class="video-placeholder" id="videoPlaceholder">
+            <div class="play-mark">▶</div>
+            <strong id="videoPlaceholderTitle">Video bài giảng</strong>
+            <span>Thay đường dẫn video trong file app.js</span>
+          </div>
+        </div>
+        <div class="lesson-heading">
+          <div><span class="micro-label" id="lessonMeta">CHƯƠNG 01 · TẬP 01</span><h1 id="lessonTitle"></h1></div>
+          <button class="complete-button" id="completeLesson" type="button">✓ Đánh dấu hoàn thành</button>
+        </div>
+        <div class="lesson-tabs" role="tablist">
+          <button class="tab active" data-tab="overview" role="tab">Tổng quan</button>
+          <button class="tab" data-tab="practice" role="tab">Thực hành</button>
+          <button class="tab" data-tab="resources" role="tab">Tài liệu <span id="resourceCount">0</span></button>
+        </div>
+        <div class="tab-panel active" id="panel-overview"><h3>Mục tiêu của tập</h3><p id="lessonObjective"></p><div class="key-note"><b>Ý chính</b><p id="lessonNote"></p></div></div>
+        <div class="tab-panel" id="panel-practice"><h3>Hướng dẫn thực hành</h3><ol id="practiceSteps"></ol></div>
+        <div class="tab-panel" id="panel-resources"><h3>Tài liệu đính kèm</h3><div id="resourceList"></div></div>
+        <div class="lesson-nav"><button id="prevLesson" type="button">← Tập trước</button><button id="nextLesson" type="button">Tập tiếp theo →</button></div>
+      </div>
+      <aside class="playlist">
+        <div class="playlist-head"><span class="micro-label">NỘI DUNG KHÓA HỌC</span><h2 id="playlistTitle"></h2><p id="playlistSummary"></p></div>
+        <div id="playlistChapters"></div>
+      </aside>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
