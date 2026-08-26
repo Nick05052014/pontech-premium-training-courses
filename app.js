@@ -58,6 +58,58 @@ function genericChapters(topic, titles) {
   ];
 }
 
+async function loadDynamoPlaylist() {
+  const course = courses.find(item => item.id === "dynamo");
+  if (!course) return;
+
+  try {
+    const response = await fetch("courses/dynamo.txt", { cache: "no-store" });
+    if (!response.ok) return;
+
+    const text = await response.text();
+    const originalLessons = flatLessons(course);
+    const chapters = [];
+    let currentChapter = { title: "Nội dung khóa học", lessons: [] };
+    let lessonNumber = 0;
+
+    text.replace(/^\uFEFF/, "").split(/\r?\n/).forEach(rawLine => {
+      const line = rawLine.trim();
+      if (!line) return;
+
+      if (line.startsWith("#")) {
+        if (currentChapter.lessons.length) chapters.push(currentChapter);
+        currentChapter = { title: line.replace(/^#+\s*/, "").trim() || "Nội dung khóa học", lessons: [] };
+        return;
+      }
+
+      const separator = line.indexOf("-");
+      if (separator < 1) return;
+
+      const filename = line.slice(0, separator).trim();
+      const displayTitle = line.slice(separator + 1).trim().replace(/[<>]/g, "");
+      if (!filename.toLowerCase().endsWith(".mp4") || !displayTitle) return;
+
+      const fallback = originalLessons[lessonNumber];
+      const item = lesson(
+        displayTitle,
+        fallback?.duration || "05:00",
+        fallback?.objective || `Nắm được nội dung chính của ${displayTitle.toLowerCase()}.`,
+        fallback?.note || "Xem trọn video và thực hiện lại thao tác trên file thực hành.",
+        fallback?.practice || [],
+        fallback?.resources || []
+      );
+      item.video = `videos/dynamo/${filename}`;
+      currentChapter.lessons.push(item);
+      lessonNumber += 1;
+    });
+
+    if (currentChapter.lessons.length) chapters.push(currentChapter);
+    if (chapters.length) course.chapters = chapters;
+  } catch {
+    // Giữ danh sách mẫu khi mở trực tiếp index.html hoặc khi TXT chưa được upload.
+  }
+}
+
 const connections = courses.flatMap(c => c.next.map(next => [c.id, next]));
 const state = { activeCourse: courses[0], lessonIndex: 0, scale: 1, tx: 0, ty: 0, dragging: false, startX: 0, startY: 0, progress: loadProgress() };
 const $ = id => document.getElementById(id);
@@ -150,4 +202,9 @@ $("continueBtn").addEventListener("click", () => { const id = sessionStorage.get
 document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("learningView").classList.contains("open")) closeLearning(); else closeModal(); } });
 window.addEventListener("resize", renderLines);
 
-renderMap(); renderCourseCards(); updateProgressUI(); observeReveals();
+async function initialize() {
+  await loadDynamoPlaylist();
+  renderMap(); renderCourseCards(); updateProgressUI(); observeReveals();
+}
+
+initialize();
